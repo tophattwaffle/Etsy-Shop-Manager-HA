@@ -4,7 +4,7 @@
   "codeowners": ["@TopHATTwaffle"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/TopHATTwaffle/etsy-shop-manager/tree/master/homeassistant/README.md",
+  "documentation": "https://github.com/TopHATTwaffle/Etsy-Shop-Manager-HA",
   "integration_type": "hub",
   "iot_class": "local_polling",
   "requirements": [],
