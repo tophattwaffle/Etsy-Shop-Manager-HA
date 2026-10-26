@@ -4,9 +4,10 @@
   "codeowners": ["@TopHATTwaffle"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/TopHATTwaffle/Etsy-Shop-Manager-HA",
+  "documentation": "https://github.com/tophattwaffle/Etsy-Shop-Manager-HA",
   "integration_type": "hub",
   "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/tophattwaffle/Etsy-Shop-Manager-HA/issues",
   "requirements": [],
   "version": "0.4.0"
 }

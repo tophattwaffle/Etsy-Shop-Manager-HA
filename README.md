@@ -7,7 +7,7 @@ It replaces the old `etsyapp` integration. The domain is different (`etsy_shop_m
 side while you switch dashboards and automations over.
 
 The dashboard card that shows these orders, `etsy-orders-card`, lives in its own repository,
-[Etsy-Shop-Manager-HA-Card](https://github.com/TopHATTwaffle/Etsy-Shop-Manager-HA-Card).
+[Etsy-Shop-Manager-HA-Card](https://github.com/tophattwaffle/Etsy-Shop-Manager-HA-Card).
 
 ## What you get
 
@@ -33,7 +33,7 @@ Shops connected in the app later get their sensor automatically at the next upda
 
 ## Install
 
-**HACS:** add the GitHub copy of this repository in HACS → ⋮ → Custom repositories (category *Integration*),
+**HACS:** add `https://github.com/tophattwaffle/Etsy-Shop-Manager-HA` in HACS → ⋮ → Custom repositories (category *Integration*),
 install **Etsy Shop Manager**, and restart Home Assistant.
 
 **Manually:** copy `custom_components/etsy_shop_manager` into your Home Assistant `config/custom_components/`
