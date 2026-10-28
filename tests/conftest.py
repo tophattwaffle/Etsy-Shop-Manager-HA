@@ -16,7 +16,10 @@ if sys.platform == "win32":
 
     pytest_socket.disable_socket = lambda *args, **kwargs: None
     # HA's HTTP client (aiodns) needs a selector loop; Windows defaults to the proactor loop.
-    runner.HassEventLoopPolicy._loop_factory = asyncio.SelectorEventLoop
+    if hasattr(runner, "HassEventLoopPolicy"):
+        runner.HassEventLoopPolicy._loop_factory = asyncio.SelectorEventLoop
+    elif hasattr(asyncio, "WindowsSelectorEventLoopPolicy"):
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 URL = "https://etsy.example.lan"
 API_KEY = "esm_testkey"
@@ -49,7 +52,7 @@ def order(receipt_id: str, ship_by: int = 1760800000) -> dict:
     }
 
 
-def shop_payload(shop_id: str, name: str, orders: list[dict]) -> dict:
+def shop_payload(shop_id: str, name: str, orders: list[dict], address_alerts: list[dict] | None = None) -> dict:
     return {
         "shop_id": shop_id,
         "shop_name": name,
@@ -58,6 +61,7 @@ def shop_payload(shop_id: str, name: str, orders: list[dict]) -> dict:
         "total_items_needed": len(orders),
         "items_needed": [{"title": "Galaxy vase", "quantity": len(orders)}] if orders else [],
         "open_orders": orders,
+        "address_alerts": address_alerts or [],
         "orders_synced_at": 1760900000,
     }
 

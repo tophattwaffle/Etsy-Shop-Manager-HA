@@ -210,3 +210,24 @@ async def test_set_made_reports_an_unknown_item(hass: HomeAssistant, aioclient_m
     with pytest.raises(ServiceValidationError):
         await hass.services.async_call(DOMAIN, "set_made", {"receipt_id": "1", "transaction_id": "99", "made": 1}, blocking=True)
     assert hass.states.get("sensor.shopone_open_orders").attributes["open_orders"][0]["items"][0]["made_quantity"] == 0
+
+
+async def test_sensor_address_alerts_attribute(hass: HomeAssistant, aioclient_mock) -> None:
+    alert = {
+        "receipt_id": "1",
+        "order_id": 1,
+        "buyer_name": "Jane Doe",
+        "status": "NotFound",
+        "message": "USPS cannot find this address.",
+        "is_suggestion": False,
+        "suggested_address": None,
+    }
+    shops = [shop_payload("42", "ShopOne", [order("1")], address_alerts=[alert])]
+    await _setup(hass, aioclient_mock, shops=shops)
+
+    sensor = hass.states.get("sensor.shopone_open_orders")
+    assert sensor is not None
+    assert sensor.attributes["address_alerts"] == [alert]
+
+    entity = hass.data["entity_components"]["sensor"].get_entity("sensor.shopone_open_orders")
+    assert "address_alerts" in entity._unrecorded_attributes
