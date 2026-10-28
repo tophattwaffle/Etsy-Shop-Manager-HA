@@ -13,7 +13,13 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .coordinator import EtsyShopManagerConfigEntry, EtsyShopManagerCoordinator, shop_device_identifier
 
 # Passed through from the service unchanged: the shape the etsy-orders-card (and the old etsyapp sensor) uses.
-_PAYLOAD_ATTRIBUTES = ("open_orders_count", "total_items_needed", "items_needed", "open_orders")
+_PAYLOAD_ATTRIBUTES = (
+    "open_orders_count",
+    "total_items_needed",
+    "items_needed",
+    "open_orders",
+    "address_alerts",
+)
 
 
 async def async_setup_entry(
@@ -44,7 +50,7 @@ class EtsyOpenOrdersSensor(CoordinatorEntity[EtsyShopManagerCoordinator], Sensor
     _attr_state_class = SensorStateClass.MEASUREMENT
     _attr_native_unit_of_measurement = "orders"
     # The order lists can be large; HA's recorder caps attributes at 16 KB, so keep them out of history.
-    _unrecorded_attributes = frozenset({"open_orders", "items_needed", "color_config"})
+    _unrecorded_attributes = frozenset({"open_orders", "items_needed", "color_config", "address_alerts"})
 
     def __init__(self, coordinator: EtsyShopManagerCoordinator, shop_id: str) -> None:
         super().__init__(coordinator)

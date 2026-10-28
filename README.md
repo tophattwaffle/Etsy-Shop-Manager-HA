@@ -19,8 +19,9 @@ For each shop connected in the app:
   `open_orders_count`, `total_items_needed`, `items_needed`, `open_orders` (each with `receipt_id`, `buyer_name`,
   `ship_by_ts`, `order_total`, `currency_code`, `items[]` with `title`, `quantity`, `variations`, `personalization`,
   `image_url`, …), plus `shop_id`, `shop_name` and `orders_synced_at`. Each item also has `transaction_id` and
-  `made_quantity` (units marked made in the app or on the card). `color_config` carries the app's order colors.
-  `open_orders`, `items_needed` and `color_config` are kept out of the recorder (HA limits recorded attributes to 16 KB).
+  `made_quantity` (units marked made in the app or on the card). `color_config` carries the app's order colors,
+  and `address_alerts` carries active USPS address alerts for open orders. `open_orders`, `items_needed`,
+  `color_config` and `address_alerts` are kept out of the recorder (HA limits recorded attributes to 16 KB).
 - An event, `etsy_shop_manager_new_order`, when an order appears that wasn't open at the previous update, and a
   matching **New order received** device trigger. Event data: `device_id`, `shop_id`, `shop_name`, `new_orders`,
   `receipts` (the new orders, same shape as `open_orders`) and `orders` (their items, flattened). Orders already
