@@ -20,7 +20,7 @@ STALE_DATA_GRACE = timedelta(minutes=5)
 EVENT_NEW_ORDER = f"{DOMAIN}_new_order"
 TRIGGER_NEW_ORDER = "new_order"
 
-API_PREFIX = "/api/ha/v1"
+API_PREFIX = "/api/v1"
 
 # The set_made action (the card's Made checkboxes).
 SERVICE_SET_MADE = "set_made"

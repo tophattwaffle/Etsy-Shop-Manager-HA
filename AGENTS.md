@@ -3,7 +3,8 @@
 Guidance for AI coding agents (Claude Code, Codex and others) working in this repository.
 
 This is the Home Assistant integration (`etsy_shop_manager`, Python) for the self-hosted Etsy Shop Manager app. It
-reads only the app's `/api/ha/v1` API on the LAN, never Etsy. The app, its design docs and the one to-do list for the
+reads only the app's API (`/api/v1`, documented in the app repository's `docs/API.md`) on the LAN, never Etsy. That API
+is generic, shared with other clients: ask for additions there rather than HA-only endpoints. The app, its design docs and the one to-do list for the
 app, this integration and the dashboard card live in the app repository,
 [etsy-shop-manager](https://github.com/TopHATTwaffle/etsy-shop-manager); the card is in
 [Etsy-Shop-Manager-HA-Card](https://github.com/TopHATTwaffle/Etsy-Shop-Manager-HA-Card).

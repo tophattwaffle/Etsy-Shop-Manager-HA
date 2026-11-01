@@ -69,4 +69,6 @@ The tests run the integration in a real Home Assistant against a mocked service 
 events, re-authentication, options). On Windows, `tests/conftest.py` adapts HA's Linux-oriented test setup, and
 HA's cleanup check reports one lingering shutdown thread on the first test; the tests themselves pass.
 
-The service side (the `/api/ha/v1` API this integration reads) is in the Etsy Shop Manager app repository.
+The service side (the `/api/v1` API this integration reads, see `docs/API.md`) is in the Etsy Shop Manager app
+repository. Since 0.6.0 the integration uses `/api/v1`, so it needs an app from November 2026 or later (which no
+longer serves the old `/api/ha/v1` path that 0.5.0 and earlier read).
