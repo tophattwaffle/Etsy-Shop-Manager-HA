@@ -188,7 +188,7 @@ async def test_older_app_without_colors_leaves_the_attribute_out(hass: HomeAssis
 
 async def test_set_made_saves_in_the_app_and_shows_at_once(hass: HomeAssistant, aioclient_mock) -> None:
     await _setup(hass, aioclient_mock)
-    aioclient_mock.post(f"{URL}/api/ha/v1/orders/1/items/10/made", json={"receipt_id": "1", "transaction_id": "10", "made_quantity": 1})
+    aioclient_mock.post(f"{URL}/api/v1/orders/1/items/10/made", json={"receipt_id": "1", "transaction_id": "10", "made_quantity": 1})
 
     response = await hass.services.async_call(
         DOMAIN, "set_made", {"receipt_id": "1", "transaction_id": "10", "made": 1}, blocking=True, return_response=True
@@ -196,7 +196,7 @@ async def test_set_made_saves_in_the_app_and_shows_at_once(hass: HomeAssistant, 
 
     assert response["made_quantity"] == 1
     method, url, body, headers = aioclient_mock.mock_calls[-1][:4]
-    assert (method, str(url), body) == ("POST", f"{URL}/api/ha/v1/orders/1/items/10/made", {"made": 1})
+    assert (method, str(url), body) == ("POST", f"{URL}/api/v1/orders/1/items/10/made", {"made": 1})
     assert headers["Authorization"] == f"Bearer {API_KEY}"
     # The card sees it without waiting for the next poll.
     state = hass.states.get("sensor.shopone_open_orders")
@@ -205,7 +205,7 @@ async def test_set_made_saves_in_the_app_and_shows_at_once(hass: HomeAssistant, 
 
 async def test_set_made_reports_an_unknown_item(hass: HomeAssistant, aioclient_mock) -> None:
     await _setup(hass, aioclient_mock)
-    aioclient_mock.post(f"{URL}/api/ha/v1/orders/1/items/99/made", status=404)
+    aioclient_mock.post(f"{URL}/api/v1/orders/1/items/99/made", status=404)
 
     with pytest.raises(ServiceValidationError):
         await hass.services.async_call(DOMAIN, "set_made", {"receipt_id": "1", "transaction_id": "99", "made": 1}, blocking=True)
